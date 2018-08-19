@@ -9,10 +9,11 @@ get '/profile' do
 end
 
 put '/profile' do
-   current_user.update({
-     first_name: params["first_name"],
-     last_name: params["last_name"],
-     selected_avatar: params["selected_avatar"]
-   })
-  201
+  updated_profile = {
+    first_name: params["first_name"],
+    last_name: params["last_name"],
+    selected_avatar: params["selected_avatar"]
+  }
+  current_user.update(updated_profile)
+  json updated_profile
 end
