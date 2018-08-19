@@ -51,12 +51,12 @@ def lambda_handler(event, context):
             "userId": user["userId"],
             "firstName": user["firstName"],
             "lastName": user["firstName"],
-            "expiresAt": _expiration_time(),
+            "expiresAt": str(_expiration_time()),
         }
         
         return {
-            "statusCode": 200,
-            "headers": { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-            "body": json.dumps(data)
+            'statusCode': 200,
+            'headers': { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+            'body': json.dumps(data)
         }
 
