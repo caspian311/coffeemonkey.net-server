@@ -62,7 +62,3 @@ end
 def current_user
   User.find_by username: current_session[:username]
 end
-
-require './login'
-require './movies'
-require './profile'
