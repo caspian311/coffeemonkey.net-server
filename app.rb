@@ -14,6 +14,8 @@ use CamelToSnake
 
 configure do
   enable :cross_origin
+
+  set :bind, "0.0.0.0"
 end
 
 before do
