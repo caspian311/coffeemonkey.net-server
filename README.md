@@ -19,7 +19,7 @@ To run:
     $ bundle exec rackup 
     
 
-## To get it up to the cloud
+## Build and run the docker container
 
     $ docker build -t coffee-monkey-server:1.0 .
     
