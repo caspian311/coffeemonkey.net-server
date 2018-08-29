@@ -1,12 +1,20 @@
 
 post '/register' do
-  200
+  halt 409 if get_user
+
+  user = User.create username: params['username'],
+    password: params['password'],
+    first_name: params['first_name'],
+    last_name: params['last_name']
+  json user
 end
 
 post '/usernameCheck' do
-  data = JSON.parse(request.body.read) rescue nil
-  username = data['username']
-  user = User.find_by(username: username)
-  halt 409 if user
+  halt 409 if get_user
   json message: "username is available"
+end
+
+def get_user
+  return @user if @user
+  @user = User.find_by(username: params['username'])
 end
