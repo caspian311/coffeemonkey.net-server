@@ -11,3 +11,12 @@ get '/chatRooms/:id' do
   parsed_data = JSON.parse chat_room
   json parsed_data
 end
+
+post '/chatRooms/:id/message' do
+  halt_unless_valid_session
+  ChatMessage.create!(
+    chat_room_id: params["id"],
+    user_id: current_user.id,
+    message: params["new_message"])
+  json({ message: "all good" })
+end
