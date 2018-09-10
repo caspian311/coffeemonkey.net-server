@@ -4,6 +4,7 @@ class CreateChatMessages < ActiveRecord::Migration
       t.string :message
       t.references :chat_room
       t.references :user
+      t.timestamps null: false
     end
   end
 end

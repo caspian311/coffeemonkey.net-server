@@ -24,6 +24,7 @@ GEM
     minitest (5.10.3)
     multi_json (1.12.2)
     mustermann (1.0.1)
+    mysql2 (0.4.10)
     plissken (1.2.0)
     puma (3.10.0)
     rack (2.0.3)
@@ -62,6 +63,7 @@ DEPENDENCIES
   awrence
   byebug
   faker
+  mysql2 (~> 0.4.0)
   plissken
   puma
   rack
