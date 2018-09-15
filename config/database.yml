@@ -3,14 +3,22 @@ default: &default
   pool: 5
   timeout: 5000
 
+# development:
+#   <<: *default
+#   database: db/coffeemonkey-dev.sqlite3
+
 development:
-  <<: *default
-  database: db/coffeemonkey-dev.sqlite3
+  adapter: mysql2
+  encoding: utf8
+  database: coffeemonkey_dev
+  username: root
+  host: 127.0.0.1
+  port: 3306
+
 
 production:
   adapter: postgresql
   encoding: unicode
-  pool: 5
   host: <%= ENV['DATABASE_HOST'] %>
   database: <%= ENV['DATABASE_NAME'] %>
   username: <%= ENV['DATABASE_USER'] %>
