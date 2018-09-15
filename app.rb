@@ -43,17 +43,13 @@ def current_session
   LoginSession.find_by auth_token: env['HTTP_AUTHORIZATION']
 end
 
-# def set_current_session(new_session)
-#   puts "No auth token given!" unless env['HTTP_AUTHORIZATION']
-#   @@sessions[env['HTTP_AUTHORIZATION']] = new_session
-# end
-
 def halt_unless_valid_session
   halt 401 unless valid_session?
 end
 
 def update_current_session
-  current_session[:expiresAt] = 5.minutes.from_now.utc.to_i
+  login_session = LoginSession.find_by(auth_token: env['HTTP_AUTHORIZATION'])
+  login_session.update_attributes expires_at: 5.minutes.from_now
 end
 
 def data
@@ -61,5 +57,5 @@ def data
 end
 
 def current_user
-  User.find_by username: current_session[:username]
+  current_session.user
 end
