@@ -39,13 +39,14 @@ end
 
 def current_session
   puts "No auth token given!" unless env['HTTP_AUTHORIZATION']
-  @@sessions[env['HTTP_AUTHORIZATION']]
+
+  LoginSession.find_by auth_token: env['HTTP_AUTHORIZATION']
 end
 
-def set_current_session(new_session)
-  puts "No auth token given!" unless env['HTTP_AUTHORIZATION']
-  @@sessions[env['HTTP_AUTHORIZATION']] = new_session
-end
+# def set_current_session(new_session)
+#   puts "No auth token given!" unless env['HTTP_AUTHORIZATION']
+#   @@sessions[env['HTTP_AUTHORIZATION']] = new_session
+# end
 
 def halt_unless_valid_session
   halt 401 unless valid_session?
