@@ -3,10 +3,6 @@ default: &default
   pool: 5
   timeout: 5000
 
-# development:
-#   <<: *default
-#   database: db/coffeemonkey-dev.sqlite3
-
 development:
   adapter: mysql2
   encoding: utf8
@@ -17,8 +13,8 @@ development:
 
 
 production:
-  adapter: postgresql
-  encoding: unicode
+  adapter: mysql2
+  encoding: utf8
   host: <%= ENV['DATABASE_HOST'] %>
   database: <%= ENV['DATABASE_NAME'] %>
   username: <%= ENV['DATABASE_USER'] %>

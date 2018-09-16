@@ -1,10 +1,9 @@
 
 get '/profile' do
   halt_unless_valid_session
-  user = User.find_by username: current_session[:username]
-  payload = { first_name: user.first_name,
-    last_name: user.last_name,
-    selected_avatar: user.selected_avatar }
+  payload = { first_name: current_user.first_name,
+    last_name: current_user.last_name,
+    selected_avatar: current_user.selected_avatar }
   json payload
 end
 
