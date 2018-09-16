@@ -4,8 +4,6 @@ require 'active_support/time'
 require 'byebug'
 require 'faker'
 
-@@sessions = {}
-
 post '/login' do
   user = find_user
 
@@ -20,9 +18,10 @@ post '/login' do
               last_name: user.last_name,
               selected_avatar: user.selected_avatar,
               expires_at: 5.minutes.from_now.utc.to_i }
-  @@sessions[auth_token] = { username: user.username,
-                             auth_token: auth_token,
-                             expires_at: 5.minutes.from_now.utc.to_i  }
+
+  LoginSession.create user: user,
+               auth_token: auth_token,
+               expires_at: 5.minutes.from_now
 
   json payload
 end
