@@ -17,6 +17,12 @@ chat_rooms.each do |name|
   ChatRoom.create name: name
 end
 
+ChatParticipant.create user: User.all.first, chat_room: ChatRoom.all.first
+ChatParticipant.create user: User.all.last, chat_room: ChatRoom.all.first
+ChatParticipant.create user: User.all.first, chat_room: ChatRoom.all.last
+ChatParticipant.create user: User.all.last, chat_room: ChatRoom.all.last
+
+
 ChatMessage.create message: "Final Fantasy 7 is the best!",
   user: User.all.first,
   chat_room: ChatRoom.all.first
