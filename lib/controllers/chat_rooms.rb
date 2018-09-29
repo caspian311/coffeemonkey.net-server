@@ -34,7 +34,8 @@ end
 
 post '/chatRooms/:id/membership' do
   halt_unless_valid_session
-  ChatParticipant.create!(
+
+  ChatParticipant.find_or_create_by(
     chat_room_id: params["id"],
     user_id: current_user.id)
   json({ message: "all good" })

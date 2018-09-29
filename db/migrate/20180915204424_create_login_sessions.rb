@@ -7,5 +7,7 @@ class CreateLoginSessions < ActiveRecord::Migration
       t.datetime :expires_at
       t.timestamps null: false
     end
+
+    add_foreign_key :login_sessions, :users
   end
 end

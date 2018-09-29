@@ -21,6 +21,9 @@ ActiveRecord::Schema.define(version: 20180929134025) do
     t.datetime "updated_at",               null: false
   end
 
+  add_index "chat_messages", ["chat_room_id"], name: "fk_rails_3070841b05", using: :btree
+  add_index "chat_messages", ["user_id"], name: "fk_rails_918ef7acc4", using: :btree
+
   create_table "chat_participants", force: :cascade do |t|
     t.integer  "chat_room_id", limit: 4
     t.integer  "user_id",      limit: 4
@@ -28,11 +31,16 @@ ActiveRecord::Schema.define(version: 20180929134025) do
     t.datetime "updated_at",             null: false
   end
 
+  add_index "chat_participants", ["chat_room_id", "user_id"], name: "index_chat_participants_on_chat_room_id_and_user_id", unique: true, using: :btree
+  add_index "chat_participants", ["user_id"], name: "fk_rails_dddf7ef4b2", using: :btree
+
   create_table "chat_rooms", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "chat_rooms", ["name"], name: "index_chat_rooms_on_name", unique: true, using: :btree
 
   create_table "login_sessions", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -42,6 +50,8 @@ ActiveRecord::Schema.define(version: 20180929134025) do
     t.datetime "updated_at",             null: false
   end
 
+  add_index "login_sessions", ["user_id"], name: "fk_rails_8c949dd2cd", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string "first_name",      limit: 255
     t.string "last_name",       limit: 255
@@ -50,4 +60,11 @@ ActiveRecord::Schema.define(version: 20180929134025) do
     t.string "selected_avatar", limit: 255
   end
 
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+
+  add_foreign_key "chat_messages", "chat_rooms"
+  add_foreign_key "chat_messages", "users"
+  add_foreign_key "chat_participants", "chat_rooms"
+  add_foreign_key "chat_participants", "users"
+  add_foreign_key "login_sessions", "users"
 end

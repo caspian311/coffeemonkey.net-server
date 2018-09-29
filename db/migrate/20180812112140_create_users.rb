@@ -1,5 +1,5 @@
 class CreateUsers < ActiveRecord::Migration
-  def up
+  def change
     create_table :users do |t|
       t.string :first_name
       t.string :last_name
@@ -7,9 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :password
       t.string :selected_avatar
     end
-  end
 
-  def down
-    drop_table :users
+    add_index :users, :username, unique: true
   end
 end
